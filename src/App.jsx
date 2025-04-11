@@ -75,6 +75,20 @@ function App() {
     }
   }
 
+  const handleDeleteCoffee = async (coffeeId) => {
+    try {
+      const deleteCoffee = await coffeeService.deleteCoffee(coffeeId)
+      if (deleteCoffee.err) {
+        throw new Error(deleteCoffee.err);
+      }
+      setCoffees(coffees.filter((coffee) => coffee._id !== deleteCoffee._id));
+      setSelectCoffee(null)
+      setIsFormOpen(false)
+    } catch (err) {
+      console.log(err)      
+    }
+  }
+
   const handleFormView = (coffee) => {
     if (!coffee._id) setSelectCoffee(null);
     setIsFormOpen(!isFormOpen);
@@ -87,7 +101,7 @@ function App() {
     {isFormOpen ?(
       <CoffeeForm handleAddCoffee={handleAddCoffee} select={selectcoffee} handleUpdateCoffee={handleUpdateCoffee}/>
     ) :
-    <CoffeeDetails handleFormView={handleFormView} select={selectcoffee} capWord={capitalizeWord} />
+    <CoffeeDetails handleDeleteCoffee={handleDeleteCoffee} handleFormView={handleFormView} select={selectcoffee} capWord={capitalizeWord} />
     }
     </>
   )

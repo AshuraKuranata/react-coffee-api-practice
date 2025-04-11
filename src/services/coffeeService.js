@@ -39,10 +39,22 @@ const update = async (formData, coffeeId) => {
     }
 }
 
+const deleteCoffee = async (coffeeId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${coffeeId}`, {
+            method: 'DELETE',
+        })
+        return res.json()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 // console.log(await index()) // Way to confirm that the URL is connecting correctly if it console.logs object
 
 export {
     index,
     create,
     update,
+    deleteCoffee,
 }

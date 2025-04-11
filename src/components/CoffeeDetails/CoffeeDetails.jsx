@@ -1,4 +1,4 @@
-const CoffeeDetails = ({select, capWord, handleFormView}) => {
+const CoffeeDetails = ({select, capWord, handleFormView, handleDeleteCoffee}) => {
     if (!select) {
         return(
             <div>
@@ -18,6 +18,7 @@ const CoffeeDetails = ({select, capWord, handleFormView}) => {
             <p><span style={{fontSize: '1.5em', fontWeight: 'bold'}}>Tasting Notes:</span> <span style={{fontSize: "1.25em"}}>{select.tastingnotes.map((note) => capWord(note) + '  ')}</span></p>
             <div>
                 <button onClick={() => handleFormView(select)}>Edit Coffee</button>
+                <button onClick={() => handleDeleteCoffee(select._id)}>Delete Coffee</button>
             </div>
         </div>
         
